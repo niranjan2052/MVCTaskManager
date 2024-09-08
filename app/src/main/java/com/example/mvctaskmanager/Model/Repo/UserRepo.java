@@ -2,6 +2,7 @@ package com.example.mvctaskmanager.Model.Repo;
 
 import android.app.Application;
 import android.os.AsyncTask;
+import android.view.View;
 
 import androidx.lifecycle.LiveData;
 
@@ -22,13 +23,17 @@ public class UserRepo {
         userList = userDao.getAllData();
     }
 
+
     public void insertData(User user) {
+        new InsertUser(userDao).execute(user);
     }
 
     public void updateData(User user) {
+        new UpdateUser(userDao).execute(user);
     }
 
     public void deleteData(User user) {
+        new DeleteUser(userDao).execute(user);
     }
 
     public LiveData<List<User>> getAllData() {

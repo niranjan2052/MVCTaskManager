@@ -14,22 +14,23 @@ public class User implements IUser {
     private String username;
     private String email;
     private String password;
-    private String isActive;
+    private boolean isActive;
 
+    @Ignore
     public User(String username, String password) {
         this.username = username;
         this.password = password;
     }
     @Ignore
-    public User(int id, String username, String email, String password, String isActive) {
+    public User(int id, String username, String email, String password, boolean isActive) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
         this.isActive = isActive;
     }
-    @Ignore
-    public User(String username, String email, String password, String isActive) {
+
+    public User(String username, String email, String password, boolean isActive) {
         this.username = username;
         this.email = email;
         this.password = password;
@@ -79,11 +80,11 @@ public class User implements IUser {
         this.password = password;
     }
 
-    public String getIsActive() {
+    public boolean getIsActive() {
         return isActive;
     }
 
-    public void setIsActive(String isActive) {
+    public void setIsActive(boolean isActive) {
         this.isActive = isActive;
     }
 }

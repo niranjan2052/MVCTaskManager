@@ -10,7 +10,6 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.mvctaskmanager.LoginActivity;
 import com.example.mvctaskmanager.R;
 
 public class SplashActivity extends AppCompatActivity {

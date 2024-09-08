@@ -11,7 +11,7 @@ import com.example.mvctaskmanager.Model.Beans.User;
 import com.example.mvctaskmanager.Model.Dao.TaskDao;
 import com.example.mvctaskmanager.Model.Dao.UserDao;
 
-@Database(entities = {User.class, Task.class}, version = 1)
+@Database(entities = {User.class, Task.class}, version = 2)
 public abstract class TaskDatabase extends RoomDatabase {
 
     // It will contain the instance of database if the database instance is already created.
@@ -26,6 +26,7 @@ public abstract class TaskDatabase extends RoomDatabase {
         //check if there is already an instance of the database if not i.e. instance==null then created instance
         if (instance == null) {
             instance = Room.databaseBuilder(context.getApplicationContext(), TaskDatabase.class, "task_database")
+                    .allowMainThreadQueries()
                     .fallbackToDestructiveMigration()
                     .build();
         }

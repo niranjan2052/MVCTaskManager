@@ -1,4 +1,4 @@
-package com.example.mvctaskmanager;
+package com.example.mvctaskmanager.View;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,12 +14,20 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class LoginActivity extends AppCompatActivity {
+import com.example.mvctaskmanager.Controller.ILoginController;
+import com.example.mvctaskmanager.Controller.LoginController;
+import com.example.mvctaskmanager.MainActivity;
+import com.example.mvctaskmanager.Model.Beans.User;
+import com.example.mvctaskmanager.Model.Repo.UserRepo;
+import com.example.mvctaskmanager.R;
+
+public class LoginActivity extends AppCompatActivity implements ILoginView {
 
     EditText edtUsername;
     EditText edtPassword;
     CheckBox chkRemember;
     Button btnLogin;
+    LoginController loginController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +40,10 @@ public class LoginActivity extends AppCompatActivity {
             return insets;
         });
 
+        UserRepo userRepo = new UserRepo(this.getApplication());
+//        userRepo.insertData(new User("admin","admin@gmail.com","admin",true));
+
+        loginController = new LoginController(LoginActivity.this,this.getApplication());
         edtUsername = findViewById(R.id.edtUsername);
         edtPassword = findViewById(R.id.edtPassword);
         chkRemember = findViewById(R.id.chkRemember);
@@ -39,10 +52,20 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent iHome = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(iHome);
-                finish();
+                loginController.OnLogin(edtUsername.getText().toString(), edtPassword.getText().toString());
             }
         });
+    }
+
+    @Override
+    public void OnLoginSuccess(String message) {
+        Intent iHome = new Intent(LoginActivity.this, MainActivity.class);
+        startActivity(iHome);
+        finish();
+    }
+
+    @Override
+    public void OnLoginError(String message) {
+        Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
     }
 }
