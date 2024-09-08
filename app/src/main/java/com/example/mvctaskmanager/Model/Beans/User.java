@@ -7,7 +7,7 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "user_table")
-public class User implements IUser {
+public class User {
     @PrimaryKey(autoGenerate = true)
     private int id;
 
@@ -65,16 +65,6 @@ public class User implements IUser {
         return password;
     }
 
-    @Override
-    public int isValid() {
-        if (TextUtils.isEmpty(getUsername())) {
-            return 0;
-        } else if (TextUtils.isEmpty(getPassword())) {
-            return 1;
-        } else {
-            return -1;
-        }
-    }
 
     public void setPassword(String password) {
         this.password = password;

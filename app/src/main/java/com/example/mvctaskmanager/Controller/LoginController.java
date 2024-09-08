@@ -23,9 +23,7 @@ public class LoginController implements ILoginController {
 
     @Override
     public void OnLogin(String username, String password) {
-        User user = new User(username, password);
-        int logincode = user.isValid();
-
+//        User user = new User(username, password);
         if (username.isEmpty()) {
             loginView.OnLoginError("Please! Enter Username");
         } else if (password.isEmpty()) {
